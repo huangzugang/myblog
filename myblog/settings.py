@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import sys
+import getpass
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -29,6 +30,12 @@ SECRET_KEY = '%oyd37a)%mh0@zts7b)ki5f1u(ibiw9z%6w9-khmz^gvrd+3&2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+user_name = getpass.getuser().lower()
+
+# 是否是服务器
+IS_SERVER = (user_name in ['Administrator', 'root', 'release'])
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,16 +89,24 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myblog',
-        'USER':'root',
-        'PASSWORD': '******',  # 请换成自己的密码
-        'HOST': '127.0.0.1',   # 如果不能连接，改成localhost试下
-        'POST': '3306',
+if IS_SERVER:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'myblog',
+            'USER':'root',
+            'PASSWORD': '******',  # 请换成自己的密码
+            'HOST': '127.0.0.1',   # 如果不能连接，改成localhost试下
+            'POST': '3306',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation

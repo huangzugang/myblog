@@ -34,7 +34,7 @@ user_name = getpass.getuser().lower()
 
 # 是否是服务器
 IS_SERVER = (user_name in ['Administrator', 'root', 'release'])
-
+IS_SERVER = False
 
 ALLOWED_HOSTS = ['*']
 

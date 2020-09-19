@@ -95,7 +95,7 @@ if IS_SERVER:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'myblog',
             'USER':'root',
-            'PASSWORD': '******',  # 请换成自己的密码
+            'PASSWORD': 'YES',  # 请换成自己的密码
             'HOST': '127.0.0.1',   # 如果不能连接，改成localhost试下
             'POST': '3306',
         }

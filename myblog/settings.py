@@ -35,6 +35,11 @@ user_name = getpass.getuser().lower()
 # 是否是服务器
 IS_SERVER = (user_name in ['Administrator', 'root', 'release'])
 
+print("------------------------")
+print(u"用户名：{}".format(user_name))
+print(u"本地测试：{}".format(not IS_SERVER))
+print("------------------------")
+
 ALLOWED_HOSTS = ['*']
 
 
